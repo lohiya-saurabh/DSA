@@ -1,17 +1,22 @@
-def longestIncreasingSubsequence(stockPrices):
-    currStreak = 0
-    longestStreak = 0
-    prevStockPrice = float('-inf')
-    noOfTradingDays = len(stockPrices)
-    for i in range(noOfTradingDays):
-        if stockPrices[i] > prevStockPrice:
-            currStreak += 1
+def longest_increasing_subsequence(arr):
+    tails = []
+    for x in arr:
+        i = binary_search(tails, 0, len(tails), x)
+        if i == len(tails):
+            tails.append(x)
         else:
-            currStreak = 1
-        prevStockPrice = stockPrices[i]
-        longestStreak = max(longestStreak, currStreak)
-    return longestStreak
+            tails[i] = x
+    return len(tails)
 
 
-print(longestIncreasingSubsequence(
-    [12, 3, 15, 8, 12, 16, 5, 3, 9, 10, 19, 27, 28, 29, 30, 16]))
+def binary_search(arr, l, r, x):
+    while l < r:
+        mid = (l+r)//2
+        if arr[mid] > x:
+            r = mid
+        else:
+            l = mid + 1
+    return r
+
+
+print(longest_increasing_subsequence([1, 7, 8, 9, 4, 4, 6, 8]))

@@ -1,12 +1,11 @@
-def total_unique_amazing_substrs(A):
+def total_amazing_substrs(A):
     vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
-    totalUniqueAmazSubstrs = set()
     n = len(A)
+    total = 0
     for i in range(n):
         if A[i] in vowels:
-            for j in range(i, n):
-                totalUniqueAmazSubstrs.add(A[i: j + 1])
-    return len(totalUniqueAmazSubstrs)
+            total += n - i
+    return total
 
 
-print(total_unique_amazing_substrs("esate"))
+print(total_amazing_substrs("esate"))
