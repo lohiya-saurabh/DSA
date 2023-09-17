@@ -185,25 +185,6 @@ class TreeNode:
             return False
         return True
 
-    def constructBinaryTreeFromInorderAndPostorder(self, inorder, postorder):
-        inorder_map = {}
-        for i, num in enumerate(inorder):
-            inorder_map[num] = i
-        return self.__constructBTHelperFromInorderAndPreorder(inorder_map, inorder, postorder, 0, len(inorder), 0, len(postorder))
-
-    def __constructBTHelperFromInorderAndPostorder(self, inorder_map, inorder, postorder, in_start, in_end, post_start, post_end):
-        if in_start == in_end or post_start == post_end:
-            return
-        root_val = postorder[post_start]
-        root_index = inorder_map[root_val]
-        root = TreeNode(root_val)
-        left_tree_size = root_index - in_start
-        root.left = self.__constructBTHelperFromInorderAndPostorder(
-            inorder_map, inorder, postorder, in_start, root_index, post_start + 1, post_start + left_tree_size + 1)
-        root.right = self.__constructBTHelperFromInorderAndPostorder(
-            inorder_map, inorder, postorder, root_index + 1, in_end, post_start + left_tree_size + 1, post_end)
-        return root
-
     def hasPathSum(self, root, targetSum):
         return self.__hasPathSumHelper(root, 0, targetSum)
 
@@ -239,16 +220,16 @@ class TreeNode:
 
     def countNodes(self, root) -> int:
         total_nodes = 0
-        return self.__countNodesHelper(root, 0, total_nodes)
+        return self.__countNodesHelper__(root, 0, total_nodes)
 
-    def __countNodesHelper(self, node, trailing_node_count, total_nodes):
+    def __countNodesHelper__(self, node, trailing_node_count, total_nodes):
         if node:
             left_count, right_count = 0, 0
             if node.left:
-                left_count = self.__countNodesHelper(
+                left_count = self.__countNodesHelper__(
                     node.left, trailing_node_count + 1, total_nodes)
             if node.right:
-                right_count = self.__countNodesHelper(
+                right_count = self.__countNodesHelper__(
                     node.right, trailing_node_count + 1, total_nodes)
             return left_count + right_count + 1
         return total_nodes
