@@ -1,7 +1,7 @@
 from trees import TreeNode
 
 
-def solve(A):
+def deserializeTree(A):
     if not A:
         return None
     nodes = {}
@@ -28,5 +28,5 @@ def solve(A):
     return nodes[0]
 
 
-print(solve([1, 2, 3, -1, -1, 4, 5, 9, -1, 6, 7, -1, -
+print(deserializeTree([1, 2, 3, -1, -1, 4, 5, 9, -1, 6, 7, -1, -
       1, 8, 11, -1, 12, 10, -1, -1, -1, -1, -1, -1, -1]))
